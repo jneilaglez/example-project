@@ -38,3 +38,13 @@ ansible-playbook -i ansible/inventory/ ansible/example-playbook.yaml
 ## Uninstallation
 
 Delete the example-project folder.
+
+## UML Diagrams
+
+Use cases diagram
+
+![alt Use cases diagram](/diagrams/example-project-use-case-diagram.drawio.png)
+
+Classes diagram
+
+![alt Classes diagram](/diagrams/example-project-class-diagram.drawio.png)
