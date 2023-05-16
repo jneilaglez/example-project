@@ -1,0 +1,4 @@
+---
+# This file contains the default variables (see ansible variable convention for more information)
+example_files_tmp_path: "tmp"
+example_files_file_1: "file_1.txt"

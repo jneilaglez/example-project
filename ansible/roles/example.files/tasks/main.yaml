@@ -1,0 +1,25 @@
+---
+# This file contains all ansible tasks that will be called within the playbook inside role sentence
+- name: Example Files | Create Tmp Folder
+  ansible.builtin.file:
+    path: "{{ example_files_tmp_path }}"
+    state: directory
+    mode: 0755
+
+- name: Example Files | Check if File 1 exists
+  stat:
+    path: "{{ example_files_tmp_path }}/{{ example_files_file_1 }}"
+  register: file_1
+
+- name: Example Files | Create File 1
+  ansible.builtin.file:
+    path: "{{ example_files_tmp_path }}/{{ example_files_file_1 }}"
+    state: touch
+    mode: 0644
+  when: not file_1.stat.exists
+
+- name: Example Files | Add line to File 1
+  ansible.builtin.lineinfile:
+    path: "{{ example_files_tmp_path }}/{{ example_files_file_1 }}"
+    regexp: "^$"
+    line: "{{ example_files_file_1 }}"

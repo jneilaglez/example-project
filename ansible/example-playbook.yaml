@@ -1,0 +1,32 @@
+---
+# This is the ansible playbook, the root script
+- hosts: localhost
+  connection: local
+  name: Example Playbook
+
+  roles:
+    - example.files
+
+  vars:
+    example_project_tmp_path: "tmp"
+    example_project_playbook_file: "playbook_file.txt"
+
+  tasks:
+
+    - name: Example Project | Check if Playbook File exists
+      stat:
+        path: "{{ example_project_tmp_path }}/{{ example_project_playbook_file }}"
+      register: playbook_file
+
+    - name: Example Project | Create Playbook File
+      ansible.builtin.file:
+        path: "{{ example_files_tmp_path }}/{{ example_project_playbook_file }}"
+        state: touch
+        mode: 0644
+      when: not playbook_file.stat.exists
+
+    - name: Example Project | Add line to Playbook File
+      ansible.builtin.lineinfile:
+        path: "{{ example_project_tmp_path }}/{{ example_project_playbook_file }}"
+        regexp: "^$"
+        line: "{{ example_project_playbook_file }}"
